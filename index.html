@@ -22,16 +22,26 @@
 		<ul class="logs"></ul>
 	</div>
 
-	<form>
+	<div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
+		<strong>Terimakasih !</strong> Kamu Berhasil mengirimkan Pesan.
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	<form name="form-kirim">
 		<div class="mb-3"></div>
 		<div class="mb-3">
-		  <input type="number" class="form-control" id="formphone" placeholder="Masukkan Nomor HP Format Id">
+		  <input type="number" class="form-control" id="formphone" placeholder="No WA : 085747199119">
 		</div>
 		<div class="mb-3">
 		  <input type="text" class="form-control" id="formtext" placeholder="Masukkan Pesan">
 		</div>
-		<button type="submit" class="btn btn-primary">Kirim</button>
-		<div class="mb-3"></div>
+		<button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
+		<button class="btn btn-primary btn-loading d-none" type="button" disabled>
+			<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+			Loading...
+		</button>
+		<div class="mb-3">
+		</div>
+		
 	  </form>
 
 
@@ -57,12 +67,18 @@
 				$('#qrcode').hide();
 			})
 
+			const form = document.forms['form-kirim'];
+			const btnKirim = document.querySelector('.btn-kirim');
+			const btnLoading = document.querySelector('.btn-loading');
+			const myAlert = document.querySelector('my-alert');
+
 			$('.btn').click(function(event){
 				event.preventDefault();
+				// ketika tombol submit di klik
+				btnLoading.classList.toggle('d-none');
+				btnKirim.classList.toggle('d-none');
 				var number = $('#formphone').val();
 				var pesan = $('#formtext').val();
-				console.log(number);
-				console.log(pesan);
 
 				$.ajax({ 
 					url: "https://whatsapp-masku.herokuapp.com/kirim-pesan", 
@@ -72,6 +88,12 @@
 						pesan: pesan 
 					}, 
 					success: () => {
+						btnLoading.classList.toggle('d-none');
+						btnKirim.classList.toggle('d-none');
+						// tampilkan alert
+						myAlert.clastList.toggle('d-none');
+						// reset form
+						form.reset();
 						console.log("Berhasil") 
 					}
 					}) 
