@@ -121,7 +121,7 @@ io.on('connection', (socket) =>{
 	socket.emit('message', 'connecting...');
 	
 	// generate QR Code d Console Jika Belum Ready
-	client.on('qr', (qr) => {
+	client.on('qr', qr => {
 		console.log('QR RECEIVED', qr);
 		qrcode.toDataURL(qr, (err, url) =>{
 			socket.emit('qr', url);
