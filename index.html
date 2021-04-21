@@ -67,16 +67,16 @@
 				$('#qrcode').hide();
 			})
 
-			const form = document.forms['form-kirim'];
-			const btnKirim = document.querySelector('.btn-kirim');
-			const btnLoading = document.querySelector('.btn-loading');
-			const myAlert = document.querySelector('my-alert');
+			// const form = document.forms['form-kirim'];
+			// const btnKirim = document.querySelector('.btn-kirim');
+			// const btnLoading = document.querySelector('.btn-loading');
+			// const myAlert = document.querySelector('my-alert');
 
 			$('.btn').click(function(event){
 				event.preventDefault();
 				// ketika tombol submit di klik
-				btnLoading.classList.toggle('d-none');
-				btnKirim.classList.toggle('d-none');
+				// btnLoading.classList.toggle('d-none');
+				// btnKirim.classList.toggle('d-none');
 				var number = $('#formphone').val();
 				var pesan = $('#formtext').val();
 
@@ -87,15 +87,13 @@
 						number: number, 
 						pesan: pesan 
 					}, 
-					success: () => {
-						btnLoading.classList.toggle('d-none');
-						btnKirim.classList.toggle('d-none');
-						// tampilkan alert
-						myAlert.clastList.toggle('d-none');
-						// reset form
-						form.reset();
-						console.log("Berhasil") 
-					}
+					success: () => console.log("Berhasil")
+						// btnLoading.classList.toggle('d-none');
+						// btnKirim.classList.toggle('d-none');
+						// // tampilkan alert
+						// myAlert.clastList.toggle('d-none');
+						// // reset form
+						// form.reset();
 					}) 
 			})
 		})
